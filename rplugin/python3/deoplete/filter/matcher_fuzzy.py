@@ -39,6 +39,6 @@ class Filter(Base):
 
         p = re.compile(fuzzy_escape(complete_str, context['camelcase']))
         if context['ignorecase']:
-            return [x for x in candidates if p.match(x['word'].lower())]
+            return [x for x in candidates if (x['word'] is not None) and p.match(x['word'].lower())]
         else:
-            return [x for x in candidates if p.match(x['word'])]
+            return [x for x in candidates if (x['word'] is not None) and p.match(x['word'])]
