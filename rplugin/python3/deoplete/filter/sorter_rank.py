@@ -40,7 +40,7 @@ class Filter(Base):
         complete_str = context['complete_str'].lower()
 
         def compare(x):
-            matched = int(complete_str in x['word'].lower())
+            matched = int(complete_str in (x['word'] or '').lower())
             mru = self._cache.get(x['word'], 0)
             return -(matched * 40 + mru * 20)
         return sorted(context['candidates'], key=compare)
